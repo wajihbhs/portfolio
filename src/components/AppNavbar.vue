@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import { useActiveSection } from '@/composables/useActiveSection'
 
 const { t, locale } = useI18n()
+const router = useRouter()
 const isScrolled = ref(false)
 const isMobileOpen = ref(false)
 
@@ -21,7 +23,7 @@ function scrollTo(id: string) {
 }
 
 function toggleLang() {
-  locale.value = locale.value === 'fr' ? 'en' : 'fr'
+  router.push(locale.value === 'fr' ? '/en' : '/fr')
 }
 
 onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
