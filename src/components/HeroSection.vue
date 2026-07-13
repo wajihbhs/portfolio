@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { personalInfo } from '@/data/cv'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+
+const cvUrl = computed(() => (locale.value === 'en' ? '/CV_EN.pdf' : '/CV_FR.pdf'))
+const cvFilename = computed(() =>
+  locale.value === 'en' ? 'CV-Wajih-EN.pdf' : 'CV-Wajih-FR.pdf',
+)
 </script>
 
 <template>
@@ -98,8 +104,8 @@ const { t } = useI18n()
               GitHub
             </a>
             <a
-              href="/CV-Wajih-Bnelhadj-Sghaier.pdf"
-              download="CV-Wajih-Bnelhadj-Sghaier.pdf"
+              :href="cvUrl"
+              :download="cvFilename"
               class="flex items-center gap-2 border border-white/20 text-white hover:bg-white/10 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
